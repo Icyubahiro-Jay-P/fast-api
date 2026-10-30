@@ -1,0 +1,145 @@
+@import "tailwindcss";
+@import "@fontsource-variable/geist";
+
+@custom-variant dark (&:is(.dark *));
+
+/* Theme tokens ported from the Cedro widgets dashboard (shadcn neutral). */
+@theme inline {
+  --font-sans: 'Geist Variable', sans-serif;
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+}
+
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans antialiased;
+    color-scheme: light;
+  }
+  html.dark {
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Text input / select look used across toolbars and forms. */
+@utility control {
+  @apply h-8 w-full rounded-lg border bg-card px-2.5 text-xs text-foreground shadow-xs outline-none placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring/50 disabled:opacity-60 aria-invalid:border-destructive;
+}
+
+/* Shared primitives, styled after the Cedro controls. */
+@layer components {
+  .btn {
+    @apply inline-flex h-8 shrink-0 items-center justify-center gap-1.5 rounded-lg border px-3 text-xs font-medium whitespace-nowrap shadow-xs transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50;
+  }
+  .btn--primary {
+    @apply border-transparent bg-foreground text-background hover:bg-foreground/85;
+  }
+  .btn--ghost {
+    @apply bg-card text-foreground hover:bg-muted;
+  }
+  .btn--danger {
+    @apply border-transparent bg-destructive text-white hover:bg-destructive/90;
+  }
+  .btn--small {
+    @apply h-7 px-2.5;
+  }
+
+  .icon-button {
+    @apply grid size-8 shrink-0 place-items-center rounded-lg text-muted-foreground transition-colors outline-none hover:bg-foreground/5 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-40;
+  }
+  .icon-button--bordered {
+    @apply border bg-card shadow-xs;
+  }
+  .icon-button--danger {
+    @apply hover:bg-destructive/10 hover:text-destructive;
+  }
+
+  .form {
+    @apply space-y-4;
+  }
+  .form__field {
+    @apply flex flex-col gap-1.5;
+  }
+  .form__field > label {
+    @apply text-xs font-medium;
+  }
+  .form__field > input,
+  .form__field > select {
+    @apply control;
+  }
+  .form__field > input:read-only {
+    @apply bg-muted;
+  }
+  .form__field > select,
+  select.control {
+    @apply appearance-none bg-no-repeat pr-7;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-position: right 0.5rem center;
+  }
+  .form__grid--2 {
+    @apply grid gap-4 sm:grid-cols-2;
+  }
+  .form__actions {
+    @apply flex justify-end gap-2 border-t border-dashed pt-4;
+  }
+  .field-error {
+    @apply text-xs text-destructive;
+  }
+  .field-hint {
+    @apply text-xs text-muted-foreground;
+  }
+  .form-alert {
+    @apply space-y-2 rounded-lg border border-destructive/30 bg-destructive/5 p-3 text-xs text-destructive;
+  }
+}

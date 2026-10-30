@@ -1,0 +1,62 @@
+import {
+  ArrowRight,
+  ArrowUpRight,
+  Box,
+  CalendarDays,
+  Check,
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  DollarSign,
+  FileText,
+  Layers,
+  LayoutGrid,
+  Menu,
+  Package,
+  Pencil,
+  Plus,
+  RefreshCw,
+  Search,
+  ShoppingBag,
+  Sparkles,
+  Trash2,
+  TrendingUp,
+  TriangleAlert,
+  Users,
+  X,
+} from 'lucide-react';
+
+// Keeps the existing name-based API; icons now come from lucide, as in Cedro.
+const icons = {
+  dashboard: LayoutGrid,
+  customers: Users,
+  products: Package,
+  orders: ShoppingBag,
+  plus: Plus,
+  search: Search,
+  close: X,
+  edit: Pencil,
+  trash: Trash2,
+  chevronLeft: ChevronLeft,
+  chevronRight: ChevronRight,
+  chevronDown: ChevronDown,
+  menu: Menu,
+  alert: TriangleAlert,
+  check: Check,
+  refresh: RefreshCw,
+  trend: TrendingUp,
+  money: DollarSign,
+  box: Box,
+  users: Users,
+  layers: Layers,
+  calendar: CalendarDays,
+  arrowUpRight: ArrowUpRight,
+  arrowRight: ArrowRight,
+  spark: Sparkles,
+  file: FileText,
+};
+
+export default function Icon({ name, size = 16, className }) {
+  const Component = icons[name] ?? Sparkles;
+  return <Component size={size} className={className} aria-hidden="true" />;
+}
